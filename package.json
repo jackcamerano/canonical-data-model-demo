@@ -13,8 +13,10 @@
     "type:check": "tsc --noEmit",
     "source:check": "npm run lint:check && npm run prettier:check && npm run type:check",
     "source:fix": "npm run lint:fix && npm run prettier:fix",
-    "test": "vitest run --config ./vitest.config.mts",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build:schemas": "tsx src/packages/cdm/build-schemas.ts",
+    "pretest": "npm run build:schemas",
+    "test": "vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
     "ajv": "^8.17.1",

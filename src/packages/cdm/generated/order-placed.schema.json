@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrderPlaced",
+  "description": "Canonical event emitted when an order is placed. All systems produce/consume this shape at integration boundaries.\n",
+  "type": "object",
+  "required": [
+    "eventId",
+    "occurredAt",
+    "source",
+    "order"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "eventId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this event instance"
+    },
+    "occurredAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the event occurred"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "system",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Identifier of the producing system"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "Semver schema version the producer is targeting (e.g. \"1.0.0\")"
+        }
+      }
+    },
+    "order": {
+      "type": "object",
+      "required": [
+        "orderId",
+        "customerId",
+        "amount",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "orderId": {
+          "type": "string"
+        },
+        "customerId": {
+          "type": "string"
+        },
+        "amount": {
+          "type": "object",
+          "required": [
+            "value",
+            "currency"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "type": "string",
+              "pattern": "^\\d+\\.\\d{2}$",
+              "description": "Decimal string representation of the amount (e.g. \"149.99\"). String avoids IEEE 754 floating-point precision issues.\n"
+            },
+            "currency": {
+              "type": "string",
+              "minLength": 3,
+              "maxLength": 3,
+              "description": "ISO 4217 currency code (e.g. \"USD\", \"EUR\")"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "placed",
+            "confirmed",
+            "shipped",
+            "delivered",
+            "cancelled"
+          ],
+          "description": "Canonical order status"
+        }
+      }
+    }
+  }
+}
