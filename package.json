@@ -16,7 +16,10 @@
     "prepare": "husky",
     "build:schemas": "tsx src/packages/cdm/build-schemas.ts",
     "pretest": "npm run build:schemas",
-    "test": "vitest run --config ./vitest.config.mts"
+    "test": "vitest run --config ./vitest.config.mts",
+    "demo:happy": "tsx scripts/demo-happy-path.ts",
+    "demo:break-currency": "tsx scripts/demo-break-currency.ts",
+    "demo:break-status": "tsx scripts/demo-break-status.ts"
   },
   "dependencies": {
     "ajv": "^8.17.1",
