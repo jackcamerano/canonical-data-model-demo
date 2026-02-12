@@ -1,0 +1,47 @@
+{
+  "name": "canonical-data-model-demo",
+  "version": "1.0.0",
+  "description": "Practical demo teaching Canonical Data Models as an integration between systems",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "lint": "npm run source:check",
+    "lint:check": "eslint . --max-warnings=0",
+    "lint:fix": "npm run lint:check -- --fix",
+    "prettier:check": "prettier . --check",
+    "prettier:fix": "npm run prettier:check -- --write",
+    "type:check": "tsc --noEmit",
+    "source:check": "npm run lint:check && npm run prettier:check && npm run type:check",
+    "source:fix": "npm run lint:fix && npm run prettier:fix",
+    "prepare": "husky",
+    "build:schemas": "tsx src/packages/cdm/build-schemas.ts",
+    "pretest": "npm run build:schemas",
+    "test": "vitest run --config ./vitest.config.mts",
+    "demo:happy": "tsx scripts/demo-happy-path.ts",
+    "demo:break-currency": "tsx scripts/demo-break-currency.ts",
+    "demo:break-status": "tsx scripts/demo-break-status.ts"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "uuid": "^13.0.0",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@types/node": "^25.2.3",
+    "@types/uuid": "^10.0.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-only-error": "^1.0.2",
+    "eslint-plugin-security": "^3.0.1",
+    "husky": "^9.1.7",
+    "jiti": "^2.6.1",
+    "json-schema-to-typescript": "^15.0.4",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0",
+    "vitest": "^4.0.18"
+  }
+}
