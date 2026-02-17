@@ -24,6 +24,8 @@ const brokenOrder: LocalOrder = {
   created_at: Date.now()
 }
 
+console.log('LocalOrder:', brokenOrder)
+
 publishOrder(bus, brokenOrder)
 
 printDLQSummary(bus)

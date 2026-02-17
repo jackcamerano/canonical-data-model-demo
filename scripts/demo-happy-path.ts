@@ -19,6 +19,8 @@ const order: LocalOrder = {
   created_at: Date.now()
 }
 
+console.log('LocalOrder:', order)
+
 publishOrder(bus, order)
 
 printDLQSummary(bus)
