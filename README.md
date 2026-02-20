@@ -10,6 +10,11 @@ A canonical data model is a shared, stable representation of a business concept 
 
 Two systems with completely different internal models communicate through a canonical `OrderPlaced` event:
 
+- **Producer A** is an e-commerce backend that creates orders using snake_case fields, numeric amounts, single-character status codes, and Unix timestamps.
+- **Consumer B** is an invoicing service that needs camelCase fields, a formatted amount string like `"149.99 USD"`, and its own simplified set of invoice statuses (`pending`, `paid`, `void`).
+
+Neither system knows about the other's data shape. They only agree on the canonical contract in between.
+
 ```mermaid
 flowchart TD
     PA["Producer A (LocalOrder)<br>snake_case, status codes: P/C/S/D/X"]
